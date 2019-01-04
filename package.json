@@ -1,0 +1,24 @@
+{
+  "name": "easy-bot",
+  "version": "0.1.0",
+  "description": "A system for create your own Discord bot with JSON.",
+  "main": "easy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bigaston/easy-bot.git"
+  },
+  "author": "Bigaston",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bigaston/easy-bot/issues"
+  },
+  "homepage": "https://github.com/Bigaston/easy-bot#readme",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "expressjs": "^1.0.1",
+    "pug": "^2.0.3"
+  }
+}
