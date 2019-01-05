@@ -41,13 +41,11 @@ function verifyGuilds() {
 
 function changeNickname(pServeur) {
 	// Detect if the bot username is different
-	var script = db.get("serveur").find({ id: pServeur.id}).value();
+	var script = db.get("serveur").find({ id: pServeur.id}).value().code;
 	if ("@customName@" in script) {
 		if (pServeur.me.displayName != script["@customName@"]) {
 			pServeur.me.setNickname(script["@customName@"]);
 		}
-	} else {
-		pServeur.me.setNickname("Easy Bot");
 	}
 }
 
