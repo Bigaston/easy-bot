@@ -44,6 +44,8 @@ Easy-Message > Bigaston hug nothing
 ### Options
 You can define some option of the bot in the JSON text :
 - \*`@prefix@` : The prefix to detect the commands
+- \*`@infoChannel@` : The channel id of your annoncement channel
+- `@customName@` : The nickname of Easy Bot in your server
 
 *(\* : Required!)*
 
@@ -67,6 +69,8 @@ Bigaston > test
 ### Custom Events
 You can use some custom event to send some message when it's trigered :
 - `#errorCommand#` : Execute when you have an error with the command. Can be used in subcommand.
+- `#userJoin#` : Execute when a user join the server. You can use the custom params `%user%` to notify the user
+- `#userLeave#` : Execute when a user leave the server. You can use the custom params `%user%` to write the user name
 
 #### Exemple :
 In the code
