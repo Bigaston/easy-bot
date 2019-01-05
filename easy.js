@@ -184,3 +184,17 @@ client.on("guildMemberRemove", user => {
 		client.channels.get(script["@infoChannel@"]).send(text);
 	}
 })
+
+client.on("guildCreate", guild => {
+	//Detect a new Discord server
+	if (db.get("serveur").find({ id: guild.id}).value() == undefined) {
+		db.get("serveur").push({ id: guild.id, code: {"@prefix@": "!"}}).write()
+	}
+})
+
+client.on("guildDelete", guild => {
+	//Detect a new Discord server
+	db.get("serveur")
+  		.remove({ id: guild.id })
+  		.write()
+})

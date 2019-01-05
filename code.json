@@ -1,0 +1,32 @@
+{
+	"@prefix@": "!",
+    "@customName@": "Easy Bot",
+    "@infoChannel@": "530841899666374686",
+    "#errorCommand#": "Commande non reconue",
+    "#userJoin#": "%user% a rejoint le serveur!",
+    "#userLeave#": "%user% a quitté le serveur!",
+    "bonjour": [
+		"Bonjour %me%!",
+		"Aurevoir"
+    ],
+    "hug": "%me% fait un hug à %1%",
+    "phrase": "%me% : %all%",
+    "maison": {
+    	"serp": {
+        	"homme": "JE SUIS UN SERPENTARD HOMME",
+            "femme": "JE SUIS UN SERPENTARD FEMME",
+            "#errorCommand#": "IL FAUT DIRE UN SEXE MONSIEUR"
+        },
+        "grif": "JE SUIS UN GRYFFONDOR",
+        "#errorCommand#": "A MARCHE PAS"
+    },
+    "jesuis": "%someone%",
+    "random": {
+        "#errorCommand#": "Il faut spécifier un minimum et un maximum!",
+        "#default#": {
+        	"#errorCommand#": "Il faut spécifier un maximum!",
+        	"#default#": "Number between %1% and %2% : %%1%-%2%%"
+        }
+	}
+		
+}
