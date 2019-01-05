@@ -10,3 +10,7 @@
 - Variable
 - Verify is people is admin/mod
 - Add loading code
+- Add some tracery grammar (?)
+
+# Other
+- Upgrade doc
