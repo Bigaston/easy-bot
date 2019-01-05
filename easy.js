@@ -3,56 +3,51 @@ const config = require("./config.json")
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
-var version = "0.1.0";
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
+
+const adapter = new FileSync('db.json')
+const db = low(adapter)
+
+var version = "0.2.0";
+
+db.defaults({ serveur : [] })
+  .write()
 
 client.login(config.token);
 
-var script = {
-	"@prefix@" : "!",
-	"@customName@" : "Easy Bot",
-	"@infoChannel@" : "530841899666374686",
-
-	"#errorCommand#" : "Commande non reconue",
-	"#userJoin#" : "%user% a rejoint le serveur!",
-	"#userLeave#" : "%user% a quitté le serveur!",
-
-	"bonjour" : ["Bonjour %me%!", "Aurevoir"],
-	"hug" : "%me% fait un hug à %1%",
-	"phrase" : "%me% : %all%",
-	"maison" : {
-		"serp" : {
-			"homme" : "JE SUIS UN SERPENTARD HOMME",
-			"femme" : "JE SUIS UN SERPENTARD FEMME",
-			"#errorCommand#" : "IL FAUT DIRE UN SEXE MONSIEUR"
-		},
-		"grif" : "JE SUIS UN GRYFFONDOR",
-		"#errorCommand#" : "A MARCHE PAS"
-	},
-	"jesuis" : "%someone%",
-	"random" : {
-		"#errorCommand#" : "Il faut spécifier un minimum et un maximum!",
-		"#default#" : {
-			"#errorCommand#" : "Il faut spécifier un maximum!",
-			"#default#" : "Number between %1% and %2% : %%1%-%2%%"
-		}
-	}
-};
-
 client.on("ready", async () => {
 	client.user.setActivity(version);
-	changeNickname();
+	verifyGuilds();
+
+	var serveurList = db.get("serveur").value()
+
+	for (var i=0; i < serveurList.length; i++) {
+		serveurObj = client.guilds.get(serveurList[i].id);
+		changeNickname(serveurObj);
+	}
 });
 
-function changeNickname() {
-	// Detect if the bot username is different
-	var serveur = client.guilds.get("352919638864035881");
+function verifyGuilds() {
+	// Detect if serveur is in the API or not
+	var clientGuild = client.guilds.array();
 
+	for (var i=0; i < clientGuild.length; i++) {
+		if (db.get("serveur").find({ id: clientGuild[i].id}).value() == undefined) {
+			db.get("serveur").push({ id: clientGuild[i].id, code: {"@prefix@": "!"}}).write()
+		}
+	}
+}
+
+function changeNickname(pServeur) {
+	// Detect if the bot username is different
+	var script = db.get("serveur").find({ id: pServeur.id}).value();
 	if ("@customName@" in script) {
-		if (serveur.me.displayName != script["@customName@"]) {
-			serveur.me.setNickname(script["@customName@"]);
+		if (pServeur.me.displayName != script["@customName@"]) {
+			pServeur.me.setNickname(script["@customName@"]);
 		}
 	} else {
-		serveur.me.setNickname("Easy Bot");
+		pServeur.me.setNickname("Easy Bot");
 	}
 }
 
@@ -61,7 +56,7 @@ function chooseResponse(pTable) {
 	return pTable[Math.floor(Math.random() * pTable.length)]
 }
 
-function replaceArg(pText, pArgs, pMessage) {
+function replaceCommandArg(pText, pArgs, pMessage) {
 	// Replace the args balise in the text
 	
 	let text = pText
@@ -73,7 +68,17 @@ function replaceArg(pText, pArgs, pMessage) {
 
 	text = text.replace("%me%", pMessage.author.username)
 	text = text.replace("%all%", pMessage.content.replace(pArgs[0] + " ", ""))
-	text = text.replace("%someone%", pMessage.guild.members.random().displayName)
+	
+	text = replaceGlobalArg(text, pMessage.guild);
+
+	text = text.replace(/%[0-9]*%/gi, "nothing")
+	return text
+}
+
+function replaceGlobalArg(pText, pServ) {
+	var text = pText;
+
+	text = text.replace("%someone%", pServ.members.random().displayName)
 	
 	// Repalacement for random number
 	if (text.match(/%[0-9]*-[0-9]*%/g) != undefined) {
@@ -90,9 +95,8 @@ function replaceArg(pText, pArgs, pMessage) {
 		}
 		
 	}
-	text = text.replace(/%[0-9]*-[0-9]*/gi,)
-	text = text.replace(/%[0-9]*%/gi, "nothing")
-	return text
+
+	return text;
 }
 
 function clone(obj) {
@@ -107,6 +111,7 @@ function clone(obj) {
 
 client.on("message", message => {
 	// Commands
+	var script = db.get("serveur").find({ id: message.guild.id}).value().code;
 	if(message.author.bot) return;
 	if (message.content.startsWith(script["@prefix@"])) {
 		args = message.content.split(/[ ]+/);
@@ -121,7 +126,7 @@ client.on("message", message => {
 		if (args[i] in sscript) {
 			if (Array.isArray(sscript[args[i]])) {
 				var response = chooseResponse(sscript[args[i]]);
-				response = replaceArg(response, args, message);
+				response = replaceCommandArg(response, args, message);
 				message.channel.send(response);
 			} else if (typeof(sscript[args[i]]) == "object") {
 				sscript = clone(sscript[args[i]])
@@ -132,13 +137,13 @@ client.on("message", message => {
 				}
 			} else {
 				var response = sscript[args[i]];
-				response = replaceArg(response, args, message);
+				response = replaceCommandArg(response, args, message);
 				message.channel.send(response);
 			}
 		} else if ("#default#" in sscript) {
 			if (Array.isArray(sscript["#default#"])) {
 				var response = chooseResponse(sscript["#default#"]);
-				response = replaceArg(response, args, message);
+				response = replaceCommandArg(response, args, message);
 				message.channel.send(response);
 			} else if (typeof(sscript["#default#"]) == "object") {
 				sscript = clone(sscript["#default#"])
@@ -149,7 +154,7 @@ client.on("message", message => {
 				}
 			} else {
 				var response = sscript["#default#"];
-				response = replaceArg(response, args, message);
+				response = replaceCommandArg(response, args, message);
 				message.channel.send(response);
 			}
 		} else if ("#errorCommand#" in sscript) {
@@ -160,18 +165,22 @@ client.on("message", message => {
 
 client.on("guildMemberAdd", user => {
 	// Detect user join
+	var script = db.get("serveur").find({ id: user.guild.id}).value().code;
 	if ("#userJoin#" in script) {
 		var text = script["#userJoin#"]
 		text = text.replace("%user%", `<@${user.id}>`)
+		text = replaceGlobalArg(text, user.guild)
 		client.channels.get(script["@infoChannel@"]).send(text);
 	}
 })
 
 client.on("guildMemberRemove", user => {
 	// Detect user leave
+	var script = db.get("serveur").find({ id: user.guild.id}).value().code;
 	if ("#userLeave#" in script) {
 		var text = script["#userLeave#"]
 		text = text.replace("%user%", user.displayName)
+		text = replaceGlobalArg(text, user.guild)
 		client.channels.get(script["@infoChannel@"]).send(text);
 	}
 })

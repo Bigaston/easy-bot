@@ -16,6 +16,7 @@
   "dependencies": {
     "discord.js": "^11.4.2",
     "expressjs": "^1.0.1",
+    "lowdb": "^1.0.0",
     "pug": "^2.0.3"
   }
 }
