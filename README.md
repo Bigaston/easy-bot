@@ -6,16 +6,21 @@ A system for create your own Discord bot with JSON.
 {
 	"name-of-the-command" : "Response",
 	"other-command" : ["Choose", "one", "response"],
-	"custom-params" : "%me% use Pikachu"
+	"custom-params" : "%me% use Pikachu",
+	"command" : {
+		"subCommand1" : "Execute when user send '!command subCommand1' ",
+		"subCommand2" : "Execute when user send '!command subCommand2' "
+	}
 }
 ```
 
-The bot use different custom params :
+### Customs Params
+You can define some customs params whitch is replaced by something :
 - `%me%` : The username of who use the command
 - `%all%` : All the text after the command 
 - `%n%` : The n-th argument. If the user don't specified him, return **nothing**
 
-### Exemple :
+#### Exemple :
 In the code
 ```
 {
@@ -35,3 +40,57 @@ Easy-Message > Bigaston hug Bob
 Bigaston > !hug
 Easy-Message > Bigaston hug nothing
 ```
+
+### Options
+You can define some option of the bot in the JSON text :
+- \*`@prefix@` : The prefix to detect the commands
+
+*(\* : Required!)*
+
+#### Exemple :
+In the code
+```
+{
+	"@prefix@" : "!",
+	"test" : "Detected!"
+}
+```
+
+In Discord
+```
+Bigaston > !test
+Easy-Message > Detected!
+
+Bigaston > test
+```
+
+### Custom Events
+You can use some custom event to send some message when it's trigered :
+- `#errorCommand#` : Execute when you have an error with the command. Can be used in subcommand.
+
+#### Exemple :
+In the code
+```
+{
+	"test" : "This is a test!",
+	"hi" : {
+		"monday" : "It's monday!",
+		"#errorCommand#" : "You need to specify a day!"
+	}
+	"#errorCommand#" : "No command like this!"
+}
+```
+
+In Discord
+```
+Bigaston > !test
+Easy-Bot > This is a test!
+
+Bigaston > !shlagvug
+Easy-Bot > No command like this!
+
+Bigaston > !hi monday
+Easy-Bot > It's monday!
+
+Bigaston > !hi
+Easy-Bot > You need to specify a day!
