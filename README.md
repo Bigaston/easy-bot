@@ -19,6 +19,7 @@ You can define some customs params whitch is replaced by something :
 - `%me%` : The username of who use the command
 - `%all%` : All the text after the command 
 - `%n%` : The n-th argument. If the user don't specified him, return **nothing**
+- `%x-y%` : Generate a random number between x and y
 
 #### Exemple :
 In the code
@@ -69,6 +70,7 @@ Bigaston > test
 ### Custom Events
 You can use some custom event to send some message when it's trigered :
 - `#errorCommand#` : Execute when you have an error with the command. Can be used in subcommand.
+- `#default#` : Command user by default. The utility is in subcommand to check some argument.
 - `#userJoin#` : Execute when a user join the server. You can use the custom params `%user%` to notify the user
 - `#userLeave#` : Execute when a user leave the server. You can use the custom params `%user%` to write the user name
 
@@ -80,8 +82,13 @@ In the code
 	"hi" : {
 		"monday" : "It's monday!",
 		"#errorCommand#" : "You need to specify a day!"
+	},
+	"other-test" : {
+		"yes" : "YES!!",
+		"#errorCommand#" : "You need to specify an argument!",
+		"#default#" : "You choose the default branch with %1%"
 	}
-	"#errorCommand#" : "No command like this!"
+	"#errorCommand#" : "No command like this!",
 }
 ```
 
@@ -89,12 +96,18 @@ In Discord
 ```
 Bigaston > !test
 Easy-Bot > This is a test!
-
 Bigaston > !shlagvug
 Easy-Bot > No command like this!
 
 Bigaston > !hi monday
 Easy-Bot > It's monday!
-
 Bigaston > !hi
 Easy-Bot > You need to specify a day!
+
+Bigaston > !other-test
+Easy-Bot > You need to specify an argument!
+Bigaston > !other-test yes
+Easy-Bot > YES!!
+Bigaston > !other-test 123
+Easy-Bot > You choose the default branch with 123
+```

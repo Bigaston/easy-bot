@@ -28,7 +28,14 @@ var script = {
 		"grif" : "JE SUIS UN GRYFFONDOR",
 		"#errorCommand#" : "A MARCHE PAS"
 	},
-	"jesuis" : "%someone%"
+	"jesuis" : "%someone%",
+	"random" : {
+		"#errorCommand#" : "Il faut spécifier un minimum et un maximum!",
+		"#default#" : {
+			"#errorCommand#" : "Il faut spécifier un maximum!",
+			"#default#" : "Number between %1% and %2% : %%1%-%2%%"
+		}
+	}
 };
 
 client.on("ready", async () => {
@@ -60,11 +67,30 @@ function replaceArg(pText, pArgs, pMessage) {
 	let text = pText
 	 
 	for (var i=0; i < pArgs.length; i++) {
-		text = text.replace(`%${i}%`, pArgs[i])
+		var reg = new RegExp("%" + i + "%", "g")
+		text = text.replace(reg, pArgs[i])
 	}
+
 	text = text.replace("%me%", pMessage.author.username)
 	text = text.replace("%all%", pMessage.content.replace(pArgs[0] + " ", ""))
-	text = text.replace("%someone%", pMessage.guild.members.random().displayName)	
+	text = text.replace("%someone%", pMessage.guild.members.random().displayName)
+	
+	// Repalacement for random number
+	if (text.match(/%[0-9]*-[0-9]*%/g) != undefined) {
+		let number = text.match(/%[0-9]*-[0-9]*%/g);
+		for (var i=0; i < number.length; i++) {
+			let min = number[i].match(/%[0-9]*-/)[0];
+			min = min.replace("%", "").replace("-", "");
+			min = parseInt(min);
+			let	max = number[i].match(/-[0-9]*%/)[0];
+			max = max.replace("%", "").replace("-", "");
+			max = parseInt(max);
+			let randomNumber = Math.floor(Math.random() * max) + min;
+			text = text.replace(/%[0-9]*-[0-9]*%/, randomNumber)
+		}
+		
+	}
+	text = text.replace(/%[0-9]*-[0-9]*/gi,)
 	text = text.replace(/%[0-9]*%/gi, "nothing")
 	return text
 }
@@ -106,6 +132,23 @@ client.on("message", message => {
 				}
 			} else {
 				var response = sscript[args[i]];
+				response = replaceArg(response, args, message);
+				message.channel.send(response);
+			}
+		} else if ("#default#" in sscript) {
+			if (Array.isArray(sscript["#default#"])) {
+				var response = chooseResponse(sscript["#default#"]);
+				response = replaceArg(response, args, message);
+				message.channel.send(response);
+			} else if (typeof(sscript["#default#"]) == "object") {
+				sscript = clone(sscript["#default#"])
+				if (i == args.length - 1) {
+					if ("#errorCommand#" in sscript) {
+						message.channel.send(sscript["#errorCommand#"]);
+					}
+				}
+			} else {
+				var response = sscript["#default#"];
 				response = replaceArg(response, args, message);
 				message.channel.send(response);
 			}
