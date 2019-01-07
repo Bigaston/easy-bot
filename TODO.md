@@ -11,6 +11,8 @@
 - Verify is people is admin/mod
 - Add loading code
 - Add some tracery grammar (?)
+- Event to trigger at a time
+- Params with date/hours/min/seconds
 
 # Other
 - Upgrade doc

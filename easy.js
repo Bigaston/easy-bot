@@ -9,7 +9,19 @@ const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('db.json')
 const db = low(adapter)
 
-var version = "0.2.0";
+var express = require('express');
+var app = express();
+
+var bodyParser = require('body-parser')
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+app.set('view engine', 'pug');
+app.set('views', './views')
+app.use(express.static("./static/"))
+
+var version = "0.3.0";
 
 db.defaults({ serveur : [] })
   .write()
@@ -196,3 +208,7 @@ client.on("guildDelete", guild => {
   		.remove({ id: guild.id })
   		.write()
 })
+
+app.listen(config.port, function() {
+	console.log("Démarage du serveur sur le port " + config.port)
+});
