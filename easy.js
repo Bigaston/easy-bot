@@ -212,3 +212,7 @@ client.on("guildDelete", guild => {
 app.listen(config.port, function() {
 	console.log("Démarage du serveur sur le port " + config.port)
 });
+
+app.get('/discord_login', function(req, res) {
+	
+});
