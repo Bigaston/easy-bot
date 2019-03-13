@@ -1,0 +1,8 @@
+{
+	"fr": {
+		"join" : "Bonjour! Je suis **${botname}**!"
+	},
+	"en": {
+		"join" : "Hello! I'm **${botname}**!"
+	}
+}

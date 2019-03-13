@@ -14,10 +14,6 @@
   },
   "homepage": "https://github.com/Bigaston/easy-bot#readme",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "discord.js": "^11.4.2",
-    "express": "^4.16.4",
-    "lowdb": "^1.0.0",
-    "pug": "^2.0.3"
+    "discord.js": "^11.4.2"
   }
 }
