@@ -11,8 +11,6 @@
 - Add loading code
 - Add some tracery grammar (?)
 - Event to trigger at a time
-- Params with date/hours/min/seconds
-- Option to change the game of the bot
 - Add option to search in the lang file
 - Option to test the channel
 - Add option to other channel

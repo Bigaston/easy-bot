@@ -6,7 +6,8 @@
         "errInfChan" : "ERREUR : Vous devez spécifier un channel d'acceuil si vous utilisez #userJoin# ou #userLeave# avec \"@infoChannel@\"",
         "startApp" : "--- Démarage de l'application ---",
         "closeApp" : "--- Fermeture de l'application ---",
-        "discordLogin" : "> Connecté à Discord!"
+		"discordLogin" : "> Connecté à Discord!",
+		"dateFormat" : "dd/mm/yyyy"
     },
     "en": {
         "join" : "Hello! I'm **${botname}**!",
@@ -15,7 +16,8 @@
         "errInfChan" : "ERROR : You need to set a default channel if you want use #userJoin# or #userLeave# with \"@infoChannel@\"",
         "startApp" : "--- Application starting ---",
         "closeApp" : "--- Application closing ---",
-        "discordLogin" : "> Connected to Discord!"
+		"discordLogin" : "> Connected to Discord!",
+		"dateFormat" : "mm/dd/yyyy"
     },
     "de": {
         "join" : "Hallo! Ich bin **${botname}** !",
@@ -24,6 +26,7 @@
         "errInfChan" : "FEHLER : un #userJoin# und #userLeave# zu verwenden, müssen Sie mit \"@infoChannel@\" ein Kanal angeben",
         "startApp" : "--- Start der Anwendung ---",
         "closeApp" : "--- Schließen der Anwendung ---",
-        "discordLogin" : "> Mit Discord verbunden !"
+		"discordLogin" : "> Mit Discord verbunden !",
+		"dateFormat" : "dd/mm/yyyy"
     }
 }

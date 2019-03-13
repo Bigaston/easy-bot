@@ -21,6 +21,16 @@ You can define some customs params whitch is replaced by something :
 - `%n%` : The n-th argument. If the user don't specified him, return **nothing**
 - `%x-y%` : Generate a random number between x and y
 
+#### Date & time :
+- `%date%` : The current date in your lang format
+- `%day%` : The current day
+- `%month%` : The current month
+- `%year%` : The current year
+- `%time%` : The current time in hh:ss format
+- `%hours%` : The current hours
+- `%min%` : The current minute
+- `%sec%` : The current seconde
+
 #### Exemple :
 In the code
 ```
