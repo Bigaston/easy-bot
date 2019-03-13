@@ -6,10 +6,14 @@ const lang = require("./lang.json");
 
 var version = "0.3.0";
 
+//Verification of the neededs parameters
+startVerif();
+
 client.login(script["@token@"]);
 
 client.on("ready", async () => {
 	client.user.setActivity(version);
+	console.log(sendLang("discordLogin"));
 
 	var clientGuild = client.guilds.array();
 	for (var i=0; i < clientGuild.length; i++) {
@@ -17,6 +21,46 @@ client.on("ready", async () => {
 		changeNickname(serveurObj);
 	}
 });
+
+function startVerif() {
+	isOk = true;
+
+	if (("@prefix@" in script) == false) {
+		isOk = false;
+		console.log(sendLang("errPrefix"));
+	}
+
+	if (("@token@" in script) == false) {
+		isOk = false;
+		console.log(sendLang("errToken"));
+	}
+
+	if ("#userJoin#" in script || "#userLeave#" in script) {
+		if (("@infoChannel@" in script) == false) {
+			isOk = false;
+			console.log(sendLang("errInfChan"));
+		}
+	}
+
+	if (isOk == false) {
+		console.log(sendLang("closeApp"));
+		process.exit();
+	} else {
+		console.log(sendLang("startApp"));
+	}
+}
+
+function sendLang(pMess) {
+	if ("@lang@" in script) {
+		if (script["@lang@"] in lang) {
+			return lang[script["@lang@"]][pMess];
+		} else {
+			return lang["en"][pMess];
+		}
+	} else {
+		return lang["en"][pMess];
+	}
+}
 
 function changeNickname(pServeur) {
 	// Detect if the bot username is different
@@ -162,10 +206,6 @@ client.on("guildMemberRemove", user => {
 client.on("guildCreate", guild => {
 	//Detect a new Discord server
 	if ("@infoChannel@" in script) {
-		if ("@lang@" in script) {
-			client.channels.get(script["@infoChannel@"]).send(lang[script["@lang@"]].join);
-		} else {
-			client.channels.get(script["@infoChannel@"]).send(lang["en"].join);
-		}
+		client.channels.get(script["@infoChannel@"]).send(sendLang("join"));
 	}
 })

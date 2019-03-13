@@ -18,7 +18,5 @@
 - Add option to other channel
 
 # Other
-- Upgrade doc (@token@, lang file)
+- Upgrade doc (lang file)
 - Add a script.json demo
-- Add verification at start with needeed params
-- Add log in console

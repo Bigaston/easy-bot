@@ -45,10 +45,14 @@ Easy-Message > Bigaston hug nothing
 ### Options
 You can define some option of the bot in the JSON text :
 - \*`@prefix@` : The prefix to detect the commands
-- \*`@infoChannel@` : The channel id of your annoncement channel
+- \*`@token@` : The Discord token of your bot
+
+- \#`@infoChannel@` : The channel id of your annoncement channel
+
+- `@lang@` : The language of your bot for system message (for now "fr" or "en")
 - `@customName@` : The nickname of Easy Bot in your server
 
-*(\* : Required!)*
+*(\* : Required!) (\# : Required for some event!)*
 
 #### Exemple :
 In the code
