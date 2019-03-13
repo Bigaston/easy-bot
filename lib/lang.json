@@ -1,0 +1,29 @@
+{
+    "fr": {
+        "join" : "Bonjour! Je suis **${botname}** !",
+        "errPrefix" : "ERREUR : Vous devez spécifier un préfixe avec \"@prefix@\"",
+        "errToken" : "ERREUR : Vous devez spécifier un token Discord avec \"@token@\"",
+        "errInfChan" : "ERREUR : Vous devez spécifier un channel d'acceuil si vous utilisez #userJoin# ou #userLeave# avec \"@infoChannel@\"",
+        "startApp" : "--- Démarage de l'application ---",
+        "closeApp" : "--- Fermeture de l'application ---",
+        "discordLogin" : "> Connecté à Discord!"
+    },
+    "en": {
+        "join" : "Hello! I'm **${botname}**!",
+        "errPrefix" : "ERROR : You have to set a prefix with\"@prefix@\"",
+        "errToken" : "ERROR : You have to set a Discord token with \"@token@\"",
+        "errInfChan" : "ERROR : You need to set a default channel if you want use #userJoin# or #userLeave# with \"@infoChannel@\"",
+        "startApp" : "--- Application starting ---",
+        "closeApp" : "--- Application closing ---",
+        "discordLogin" : "> Connected to Discord!"
+    },
+    "de": {
+        "join" : "Hallo! Ich bin **${botname}** !",
+        "errPrefix" : "FEHLER : Sie müssen mit \"@prefix@\" ein Präfix angeben",
+        "errToken" : "FEHLER : Sie müssen mit \"@token@\" ein Zeichen angeben",
+        "errInfChan" : "FEHLER : un #userJoin# und #userLeave# zu verwenden, müssen Sie mit \"@infoChannel@\" ein Kanal angeben",
+        "startApp" : "--- Start der Anwendung ---",
+        "closeApp" : "--- Schließen der Anwendung ---",
+        "discordLogin" : "> Mit Discord verbunden !"
+    }
+}

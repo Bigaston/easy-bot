@@ -1,7 +1,7 @@
 # Discord
 - Command to add command
 - Modify option in Discord
-- Add hardcoder command (info, script)
+- Add hardcoded command (info, script)
 
 # Synthax
 - Add action (add roles, kick member)
@@ -20,3 +20,4 @@
 # Other
 - Upgrade doc (lang file)
 - Add a script.json demo
+- Add a version manager with the package.json file

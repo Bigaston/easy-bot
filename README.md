@@ -1,4 +1,4 @@
-# easy-bot
+# EasyBot
 A system for create your own Discord bot with JSON.
 
 ## Synthax
@@ -33,13 +33,13 @@ In the code
 In Discord
 ```
 Bigaston > !test I like potatoe
-Easy-Message > Bigaston : I like potatoe
+EasyBot > Bigaston : I like potatoe
 
 Bigaston > !hug Bob
-Easy-Message > Bigaston hug Bob
+EasyBot > Bigaston hug Bob
 
 Bigaston > !hug
-Easy-Message > Bigaston hug nothing
+EasyBot > Bigaston hug nothing
 ```
 
 ### Options
@@ -49,8 +49,9 @@ You can define some option of the bot in the JSON text :
 
 - \#`@infoChannel@` : The channel id of your annoncement channel
 
-- `@lang@` : The language of your bot for system message (for now "fr" or "en")
+- `@lang@` : The language of your bot for system message (for now "fr", "en" or "de")
 - `@customName@` : The nickname of Easy Bot in your server
+- `@customGame@` : The custom game of EasyBot
 
 *(\* : Required!) (\# : Required for some event!)*
 
@@ -66,7 +67,7 @@ In the code
 In Discord
 ```
 Bigaston > !test
-Easy-Message > Detected!
+EasyBot > Detected!
 
 Bigaston > test
 ```
@@ -99,19 +100,19 @@ In the code
 In Discord
 ```
 Bigaston > !test
-Easy-Bot > This is a test!
+EasyBot > This is a test!
 Bigaston > !shlagvug
-Easy-Bot > No command like this!
+EasyBot > No command like this!
 
 Bigaston > !hi monday
-Easy-Bot > It's monday!
+EasyBot > It's monday!
 Bigaston > !hi
-Easy-Bot > You need to specify a day!
+EasyBot > You need to specify a day!
 
 Bigaston > !other-test
-Easy-Bot > You need to specify an argument!
+EasyBot > You need to specify an argument!
 Bigaston > !other-test yes
-Easy-Bot > YES!!
+EasyBot > YES!!
 Bigaston > !other-test 123
-Easy-Bot > You choose the default branch with 123
+EasyBot > You choose the default branch with 123
 ```
