@@ -1,5 +1,5 @@
 # EasyBot
-A system for create your own Discord bot with JSON.
+A system made to create your own Discord bot with JSON.
 
 ## Synthax
 ```
@@ -14,8 +14,8 @@ A system for create your own Discord bot with JSON.
 }
 ```
 
-### Customs Params
-You can define some customs params whitch is replaced by something :
+### Customs Parameters
+You can define some customs parameters whitch is replaced by something :
 - `%me%` : The username of who use the command
 - `%all%` : All the text after the command 
 - `%n%` : The n-th argument. If the user don't specified him, return **nothing**
@@ -53,7 +53,7 @@ EasyBot > Bigaston hug nothing
 ```
 
 ### Options
-You can define some option of the bot in the JSON text :
+You may define some bot settings in the JSON doc:
 - \*`@prefix@` : The prefix to detect the commands
 - \*`@token@` : The Discord token of your bot
 
@@ -83,11 +83,12 @@ Bigaston > test
 ```
 
 ### Custom Events
-You can use some custom event to send some message when it's trigered :
-- `#errorCommand#` : Execute when you have an error with the command. Can be used in subcommand.
-- `#default#` : Command user by default. The utility is in subcommand to check some argument.
-- `#userJoin#` : Execute when a user join the server. You can use the custom params `%user%` to notify the user
-- `#userLeave#` : Execute when a user leave the server. You can use the custom params `%user%` to write the user name
+You may use custom events to send a message when triggered :
+- `#errorCommand#` : executed when a command triggers an error, Can be used in subcommands
+- `#default#` : Command used by default. Its utility is in a subcommand to check some arguments
+- `#userJoin#` : Executed when a user join the server. You may use the custom parameters `%user%` to notify the user
+- `#userLeave#` : Executed when a user leave the server. You may use the custom parameters `%user%` to write the user name
+- `#channel:[channelId]#` : Test if the message is from the channel with id "channelId". You have to use this just under the command! You can use #default# to specify the action if it's not in channelId.
 
 #### Exemple :
 In the code
