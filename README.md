@@ -22,14 +22,17 @@ You can define some customs parameters whitch is replaced by something :
 - `%x-y%` : Generate a random number between x and y
 
 #### Date & time :
-- `%date%` : The current date in your lang format
-- `%day%` : The current day
-- `%month%` : The current month
-- `%year%` : The current year
-- `%time%` : The current time in hh:ss format
-- `%hours%` : The current hours
-- `%min%` : The current minute
-- `%sec%` : The current seconde
+- `%date:date%` : The current date in your lang format
+- `%date:day%` : The current day
+- `%date:month%` : The current month
+- `%date:year%` : The current year
+- `%date:time%` : The current time in hh:ss format
+- `%date:hours%` : The current hours
+- `%date:min%` : The current minute
+- `%date:sec%` : The current seconde
+
+#### Channel:
+- `%channel:name%` : The name of the current channel
 
 #### Exemple :
 In the code
