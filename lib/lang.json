@@ -10,7 +10,7 @@
 		"dateFormat" : "dd/mm/yyyy",
 		"importGlobal" : "> Importation : Démarrage",
 		"errChechV" : "! Erreur pendant le test de la version",
-		"newVersion" : "? Une nouvelle version est disponible! > ${versionNumber}"
+		"newVersion" : "? Une nouvelle version est disponible! ${versionNumber} (Pour le moment : ${currentVersion})"
     },
     "en": {
         "join" : "Hello! I'm **${botname}**!",
@@ -23,7 +23,7 @@
 		"dateFormat" : "mm/dd/yyyy",
 		"importGlobal" : "> Import : Starting",
 		"errChechV" : "! Error in the version control",
-		"newVersion" : "? A new version is available! > ${versionNumber}"
+		"newVersion" : "? A new version is available! ${versionNumber} (Current : ${currentVersion})"
     },
     "de": {
         "join" : "Hallo! Ich bin **${botname}** !",
@@ -36,6 +36,6 @@
 		"dateFormat" : "dd/mm/yyyy",
 		"importGlobal" : "> Import : Start",
 		"errChechV" : "! Fehler kartoflen salad",
-		"newVersion" : "? Version machin dispo! > ${versionNumber}"
+		"newVersion" : "? Version machin dispo! > ${versionNumber} (Current : ${currentVersion})"
     }
 }
