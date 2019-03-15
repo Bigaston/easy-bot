@@ -1,6 +1,6 @@
 {
   "name": "easy-bot",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A system for create your own Discord bot with JSON.",
   "main": "easy.js",
   "repository": {
@@ -14,6 +14,7 @@
   },
   "homepage": "https://github.com/Bigaston/easy-bot#readme",
   "dependencies": {
-    "discord.js": "^11.4.2"
+    "discord.js": "^11.4.2",
+    "node-fetch": "^2.3.0"
   }
 }

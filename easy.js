@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
+const fetch = require("node-fetch")
 var fs = require('fs');
 
 // Import JSON Files
