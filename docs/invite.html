@@ -1,0 +1,25 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Invite the bot</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="main.css">
+	<script src="main.js"></script>
+</head>
+<body>
+	<center>
+		<p><a href="https://discordapp.com/developers/applications/">Create a new app</a></p>
+		<input type="text" id="id_box">
+		<button id="gen_id" onclick="sendinvite()"/>Click me to gen your token</button>
+	</center>
+
+	<script>
+		function sendinvite() {
+			window.open("https://discordapp.com/oauth2/authorize?client_id=" + document.getElementById("id_box").value + "&scope=bot&permissions=67169280", '_blank')
+		}
+	</script>
+	
+</body>
+</html>
