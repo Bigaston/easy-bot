@@ -1,7 +1,4 @@
-# EasyBot
-A system made to create your own Discord bot with JSON.
-
-## Installation
+# Installation
 Clone this reposistory and use this command. You need [NodeJS](https://nodejs.org/en/) to run this project.
 
 ```
@@ -12,7 +9,7 @@ After that, edit the `script.json` file with your bot token and some data! You c
 
 The bot need some permission. You can use [this](https://bigaston.github.io/easy-bot/invite.html) very little and ugly website to have all the needed permission! Just past your app id inside.
 
-## Synthax
+# Synthax
 ```
 {
 	"name-of-the-command" : "Response",
@@ -25,14 +22,14 @@ The bot need some permission. You can use [this](https://bigaston.github.io/easy
 }
 ```
 
-### Customs Parameters
+## Customs Parameters
 You can define some customs parameters whitch is replaced by something :
 - `%me%` : The username of who use the command
 - `%all%` : All the text after the command 
 - `%n%` : The n-th argument. If the user don't specified him, return **nothing**
 - `%x-y%` : Generate a random number between x and y
 
-#### Date & time :
+### Date & time :
 - `%date:date%` : The current date in your lang format
 - `%date:day%` : The current day
 - `%date:month%` : The current month
@@ -42,10 +39,10 @@ You can define some customs parameters whitch is replaced by something :
 - `%date:min%` : The current minute
 - `%date:sec%` : The current seconde
 
-#### Channel:
+### Channel:
 - `%channel:name%` : The name of the current channel
 
-#### Exemple :
+### Exemple :
 In the code
 ```
 {
@@ -66,7 +63,7 @@ Bigaston > !hug
 EasyBot > Bigaston hug nothing
 ```
 
-### Options
+## Options
 You may define some bot settings in the JSON doc:
 - \*`@prefix@` : The prefix to detect the commands
 - \*`@token@` : The Discord token of your bot
@@ -79,7 +76,7 @@ You may define some bot settings in the JSON doc:
 
 *(\* : Required!) (\# : Required for some event!)*
 
-#### Exemple :
+### Exemple :
 In the code
 ```
 {
@@ -96,7 +93,7 @@ EasyBot > Detected!
 Bigaston > test
 ```
 
-### Custom Events
+## Custom Events
 You may use custom events to send a message when triggered :
 - `#errorCommand#` : executed when a command triggers an error, Can be used in subcommands
 - `#default#` : Command used by default. Its utility is in a subcommand to check some arguments
@@ -104,7 +101,7 @@ You may use custom events to send a message when triggered :
 - `#userLeave#` : Executed when a user leave the server. You may use the custom parameters `%user%` to write the user name
 - `#channel:[channelId]#` : Test if the message is from the channel with id "channelId". You have to use this just under the command! You can use #default# to specify the action if it's not in channelId.
 
-#### Exemple :
+### Exemple :
 In the code
 ```
 {
