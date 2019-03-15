@@ -96,7 +96,9 @@ client.on("message", message => {
 				message.channel.send(response);
 			}
 		} else if ("#errorCommand#" in sscript) {
-			message.channel.send(sscript["#errorCommand#"]);
+			response = sscript["#errorCommand#"]
+			response = replaceCommandArg(response, args, message);
+			message.channel.send(response);
 		}
 
 		i++;
