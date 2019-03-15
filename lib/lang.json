@@ -8,9 +8,7 @@
         "closeApp" : "--- Fermeture de l'application ---",
 		"discordLogin" : "> Connecté à Discord!",
 		"dateFormat" : "dd/mm/yyyy",
-		"importGlobal" : "> Importation : Démarrage",
-		"importFunction" : "> Importation : function.js",
-		"importChannel" : "> Importation : channel.js"
+		"importGlobal" : "> Importation : Démarrage"
     },
     "en": {
         "join" : "Hello! I'm **${botname}**!",
@@ -21,9 +19,7 @@
         "closeApp" : "--- Application closing ---",
 		"discordLogin" : "> Connected to Discord!",
 		"dateFormat" : "mm/dd/yyyy",
-		"importGlobal" : "> Import : Starting",
-		"importFunction" : "> Import : function.js",
-		"importChannel" : "> Import : channel.js"
+		"importGlobal" : "> Import : Starting"
     },
     "de": {
         "join" : "Hallo! Ich bin **${botname}** !",
@@ -34,8 +30,6 @@
         "closeApp" : "--- Schließen der Anwendung ---",
 		"discordLogin" : "> Mit Discord verbunden !",
 		"dateFormat" : "dd/mm/yyyy",
-		"importGlobal" : "> Import : Start",
-		"importFunction" : "> Import : function.js",
-		"importChannel" : "> Import : channel.js"
+		"importGlobal" : "> Import : Start"
     }
 }

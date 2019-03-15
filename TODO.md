@@ -18,4 +18,3 @@
 - Upgrade doc (lang file)
 - Add a script.json demo
 - Add a version manager with the package.json file
-- Edit importation to symplify new developement methode (with import.js)

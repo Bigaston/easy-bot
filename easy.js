@@ -2,11 +2,16 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 var fs = require('fs');
 
+// Import JSON Files
+const package = require("./package.json")
 var script = require("./script.json");
 const lang = require("./lib/lang.json");
-const package = require("./package.json")
 
-eval(fs.readFileSync("./lib/import.js").toString());
+// Import lib and function
+eval(fs.readFileSync("./lib/function.js").toString());
+console.log(sendLang("importGlobal"));
+const channel = require("./lib/channel.js");
+const date = require("./lib/date.js");
 
 //Verification of the neededs parameters
 startVerif();
@@ -45,14 +50,14 @@ client.on("message", message => {
 				message.channel.send(response);
 			} else if (typeof(sscript[args[i]]) == "object") {
 				sscript = clone(sscript[args[i]])
-				if (testChannel(sscript, message) == 0) {
+				if (channel.trigger(sscript, message) == 0) {
 					if (i == args.length - 1) {
 						if ("#errorCommand#" in sscript) {
 							message.channel.send(sscript["#errorCommand#"]);
 						}
 					}
 				} else {
-					sscript = testChannel(sscript, message);
+					sscript = channel.trigger(sscript, message);
 					if (Array.isArray(sscript)) {
 						var response = chooseResponse(sscript);
 						response = replaceCommandArg(response, args, message);
