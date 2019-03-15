@@ -1,6 +1,15 @@
 # EasyBot
 A system made to create your own Discord bot with JSON.
 
+## Installation
+Clone this reposistory and use this command. You need [NodeJS](https://nodejs.org/en/) to run this project.
+
+```
+npm install
+```
+
+After that, edit the `script.json` file with your bot token and some data! You can check the `exemple_script.json` file if you want!
+
 ## Synthax
 ```
 {
