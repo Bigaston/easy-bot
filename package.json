@@ -1,7 +1,7 @@
 {
   "name": "easy-bot",
-  "version": "0.4.0",
-  "description": "A system for create your own Discord bot with JSON.",
+  "version": "0.4.1",
+  "description": "A system to create your own Discord bot with JSON.",
   "main": "easy.js",
   "repository": {
     "type": "git",

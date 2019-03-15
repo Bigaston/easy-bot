@@ -13,6 +13,7 @@ eval(fs.readFileSync("./lib/function.js").toString());
 console.log(sendLang("importGlobal"));
 const channel = require("./lib/channel.js");
 const date = require("./lib/date.js");
+const message = require("./lib/message.js");
 
 //Verification of the neededs parameters
 startVerif();
@@ -42,6 +43,14 @@ client.on("message", message => {
 
 	var sscript = clone(script);
 	args[0] = args[0].replace(script["@prefix@"], "");
+
+	if (checksecurity(args) == false) {
+		if ("#errorCommand#" in sscript) {
+			message.channel.send(sscript["#errorCommand#"]);
+		}
+		return;
+	}
+
 	i = 0;
 	while (i < args.length) {
 		if (args[i] in sscript) {
