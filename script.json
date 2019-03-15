@@ -1,21 +1,5 @@
 {
-	"@token@": "NTMwODM4MDI4MDUxMDIxODI0.DzB-EA.wE3V1JZuTyhoGnY5mmMzz3la8GI",
+	"@token@": "[Your bot token here]",
 	"@prefix@": "!",
-	"@customName@": "AWNSOME Easy Bot",
-	"@infoChannel@": "427909883808055305",
-	"@lang@": "en",
-	"@customGame@" : "Hellow!",
-    "#errorCommand#": "No command like this %0%",
-    "#userJoin#": "%user% join the server!",
-	"#userLeave#": "%user% join the server!",
-	"today" : "Today we are the %date:date%",
-	"hello" : "👋 Hello %me%",
-	"roll" : "%me% your roll %0-100%",
-	"house" : {
-		"js" : "Welcome to the Javascript House %me% !",
-		"c" : "Welcome to the C house %me% !",
-		"#default#" : "Welcome to the %1% House %me% !",
-		"#errorCommand#" : "You need to specify and house!"
-	},
-	"here" : "You are in the %channel:name% channel!"
+	"@infoChannel@": "[Your default channel id here]"
 }
