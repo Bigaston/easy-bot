@@ -10,6 +10,8 @@ npm install
 
 After that, edit the `script.json` file with your bot token and some data! You can check the `exemple_script.json` file if you want!
 
+The bot need some permission. You can use [this](https://bigaston.github.io/easy-bot/invite.html) very little and ugly website to have all the needed permission! Just past your app id inside.
+
 ## Synthax
 ```
 {
