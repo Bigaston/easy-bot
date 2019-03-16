@@ -1,8 +1,8 @@
 {
-	"@token@": "NTMwODM4MDI4MDUxMDIxODI0.D21OdQ.FdysIyHZ1inpOIZVTqFX03h1PM8",
+	"@token@": "[YOUR BOT TOKEN]",
 	"@prefix@": "!",
 	"@customName@": "AWNSOME Easy Bot",
-	"@infoChannel@": "427909883808055305",
+	"@infoChannel@": "[YOUR INFO CHANNEL]",
 	"@lang@": "en",
 	"@customGame@" : "Hellow!",
     "#errorCommand#": "No command like this %0%",
