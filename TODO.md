@@ -17,4 +17,4 @@
 # Other
 - Upgrade doc (lang file)
 - Add a script.json demo
-- Add a version manager with the package.json file
+- Add roles param in the join event

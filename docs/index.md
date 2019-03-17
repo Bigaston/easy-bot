@@ -138,3 +138,10 @@ EasyBot > YES!!
 Bigaston > !other-test 123
 EasyBot > You choose the default branch with 123
 ```
+
+## Custom action
+When you write some of this in your response, they will do some action and be ereased!
+- `!message:delete!` : Remove the command message
+- `!role:add[role_name]!` : Add the role role_name to the user
+- `!role:remove[role_name]!` : Remove the role role_name to the user
+- `!role:trigger[role_name]!` : Add the role if the user don't have it, else remove it

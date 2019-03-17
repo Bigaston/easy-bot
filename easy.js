@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const fetch = require("node-fetch")
 var fs = require('fs');
 
-// Import JSON Files
+// Import JSON Files'
 const package = require("./package.json")
 var script = require("./script.json");
 const lang = require("./lib/lang.json");
@@ -14,6 +14,7 @@ console.log(sendLang("importGlobal"));
 const channel = require("./lib/channel.js");
 const date = require("./lib/date.js");
 const message = require("./lib/message.js");
+const role = require("./lib/role.js");
 
 //Verification of the neededs parameters
 startVerif();
