@@ -15,6 +15,7 @@ const channel = require("./lib/channel.js");
 const date = require("./lib/date.js");
 const message = require("./lib/message.js");
 const role = require("./lib/role.js");
+//const game = require("./lib/game.js");
 
 //Verification of the neededs parameters
 startVerif();
