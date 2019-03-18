@@ -61,3 +61,5 @@ typings/
 .next
 
 db.json
+config.json
+script.json
