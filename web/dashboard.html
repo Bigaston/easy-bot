@@ -1,0 +1,88 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>EasyBot</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<style>
+		#last_version {
+			color: red;
+			text-emphasis: weight;
+		}
+		</style>
+	
+	</head>
+	<body>
+		<center>
+			<h1>EasyBot Dashboard</h1>
+			<p>Here you can edit your bot information</p>
+			<p id="bot_version"></p>
+			<p id="last_version"></p>
+
+			<p><a href="https://bigaston.github.io/easy-bot/">Documentation</a> <a href="https://bigaston.github.io/easy-bot/changelog">Changelog</a></p>
+
+			<h2>Your code</h2>
+			<form action="./update" method="post">
+				<textarea class="form-control" id="code" rows="20" name="code"></textarea><br>
+
+				<button type="submit" class="btn btn-primary">Update</button>
+			</form>
+		</center>
+
+		<script>
+			version = "";
+			fetch('https://raw.githubusercontent.com/Bigaston/easy-bot/master/package.json')
+				.then( function (response) {
+					if (response.ok)
+						return response.json();
+					throw new Error("Error on Github version check!");
+				})
+				.then( function (data) {
+					version = data.version
+				})
+				.catch( function (error) {
+					console.log(error.message);
+				});
+			fetch("/get_code")
+				.then( function (response) {
+					if (response.ok)
+						return response.json();
+					throw new Error('Response is not OK');
+				})
+				.then( function (data) {
+					txt_box = document.getElementById("code");
+					txt_box.innerHTML = JSON.stringify(data.code, null, 2);
+					v = document.getElementById("bot_version")
+					v.innerHTML = "Bot version : " + data.version + " - Last version : " + version
+
+					online = version.split(".");
+					local = data.version.split(".");
+
+					for (i = 0; i < 3; i++) {
+						online[i] = parseInt(online[i]);
+						local[i] = parseInt(local[i]);
+					}
+
+					if (online[0] > local[0]) {
+						document.getElementById("last_version").innerHTML = "You can download a new version on <a href=\"https://github.com/Bigaston/easy-bot\">Github</a>!"
+					} else if (online[0] == local[0]) {
+						if (online[1] > local[1]) {
+							document.getElementById("last_version").innerHTML = "You can download a new version on <a href=\"https://github.com/Bigaston/easy-bot\">Github</a>!"
+						} else if (online[1] == local[1]) {
+							if (online[2] > local[2]) {
+								document.getElementById("last_version").innerHTML = "You can download a new version on <a href=\"https://github.com/Bigaston/easy-bot\">Github</a>!"
+							} 
+						}
+					}
+				})
+				.catch( function (error) {
+					console.log(error.message);
+				});
+		</script>
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	</body>
+</html>

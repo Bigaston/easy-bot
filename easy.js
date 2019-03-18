@@ -7,6 +7,38 @@ var fs = require('fs');
 const package = require("./package.json")
 var script = require("./script.json");
 const lang = require("./lib/lang.json");
+const config = require("./config.json");
+
+const bcrypt = require("bcrypt");
+
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+
+const adapter = new FileSync('db.json');
+const db = low(adapter);
+
+db.defaults({ user: {}, number: 0})
+	.write();
+
+var cookieSession = require('cookie-session')
+const express = require('express');
+const app = express();
+
+var bodyParser = require('body-parser')
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
+
+app.use(cookieSession({
+	name: 'session',
+	keys: config.secret_key,
+  
+	// Cookie Options
+	maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }))
+
+var randtoken = require('rand-token');
 
 // Import lib and function
 eval(fs.readFileSync("./lib/function.js").toString());
@@ -142,3 +174,96 @@ client.on("guildCreate", guild => {
 		client.channels.get(script["@infoChannel@"]).send(sendLang("join").replace("${botname}", client.user.username));
 	}
 })
+
+app.get('/', function(req, res) {
+	if (config.online_login) {
+		if (db.get("number").value() == 0) {
+			res.sendFile(__dirname + "/web/createuser.html");
+		} else {
+			res.sendFile(__dirname + "/web/index.html")
+		}
+	} else {
+		res.redirect("/dashboard")
+	}
+
+});
+
+app.get("/dashboard", function(req, res) {
+	if (config.online_login) {
+		if (req.session.token == db.get("user." + req.session.name + ".token").value()) {
+			res.sendFile(__dirname + "/web/dashboard.html")
+		} else {
+			res.redirect("/")
+		}
+	} else {
+		res.sendFile(__dirname + "/web/dashboard.html")
+	}
+
+})
+
+app.get("/get_code", function(req, res) {
+	if (config.online_login) {
+		if (req.session.token == db.get("user." + req.session.name + ".token").value()) {
+			res.status(200).json({code: script, version: package.version});
+		} else {
+			res.status(403)
+		}
+	} else {
+		res.status(200).json({code: script});
+	}
+})
+
+app.post("/update", function(req, res) {
+	if (config.online_login) {
+		if (req.session.token == db.get("user." + req.session.name + ".token").value()) {
+			script = JSON.parse(req.body.code)
+			fs.writeFile('script.json', req.body.code, 'utf8', function(err, data) {
+				if (err) throw err;
+				res.redirect("/dashboard")
+			});
+
+		} else {
+			res.status(403)
+		}
+	} else {
+		script = JSON.parse(req.body.code)
+		fs.writeFile('scriptt.json', req.body.code, 'utf8', function(err, data) {
+			if (err) throw err;
+			res.redirect("/dashboard")
+		});
+	}
+})
+
+app.post("/newuser", function(req, res) {
+	if (db.get("user." + req.body.name).value() == undefined) {
+		password = bcrypt.hashSync(req.body.password, 12);
+
+		db.set("user." +  req.body.name, {"password" : password, "token" : ""}).write()
+		db.update("number", n => n + 1).write()
+
+		res.redirect("/");
+	}
+})
+
+app.post("/login", function(req, res) {
+	if (db.get("user." + req.body.name).value() != undefined) {
+		if (bcrypt.compareSync(req.body.password, db.get("user." + req.body.name).value().password)) {
+			var token = randtoken.generate(32);
+			db.set("user." + req.body.name + ".token", token).write();
+
+			req.session.token = token;
+			req.session.name = req.body.name;
+			res.redirect("/dashboard")
+		} else {
+			res.redirect("/");
+		}
+	} else {
+		res.redirect("/");
+	
+	}
+})
+
+
+app.listen(config.port, function() {
+	console.log(sendLang("startExpress").replace("${port}", config.port));
+});

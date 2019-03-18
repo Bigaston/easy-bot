@@ -16,5 +16,12 @@
 
 # Other
 - Upgrade doc (lang file)
-- Add a script.json demo
 - Add roles param in the join event
+
+# Online dashboard
+- Add password change
+- Add user
+- Verification when you update the code
+- Server list
+- Button to add the bot to your discord
+- Add "visual scripting"

@@ -10,7 +10,8 @@
 		"dateFormat" : "dd/mm/yyyy",
 		"importGlobal" : "> Importation : Démarrage",
 		"errChechV" : "! Erreur pendant le test de la version",
-		"newVersion" : "? Une nouvelle version est disponible! ${versionNumber} (Pour le moment : ${currentVersion})"
+		"newVersion" : "? Une nouvelle version est disponible! ${versionNumber} (Pour le moment : ${currentVersion})",
+		"startExpress" : "> Serveur Express démaré sur le port ${port}"
     },
     "en": {
         "join" : "Hello! I'm **${botname}**!",
@@ -23,7 +24,8 @@
 		"dateFormat" : "mm/dd/yyyy",
 		"importGlobal" : "> Import : Starting",
 		"errChechV" : "! Error in the version control",
-		"newVersion" : "? A new version is available! ${versionNumber} (Current : ${currentVersion})"
+		"newVersion" : "? A new version is available! ${versionNumber} (Current : ${currentVersion})",
+		"startExpress" : "> Express' server started on port ${port}"
     },
     "de": {
         "join" : "Hallo! Ich bin **${botname}** !",
@@ -36,6 +38,7 @@
 		"dateFormat" : "dd/mm/yyyy",
 		"importGlobal" : "> Import : Start",
 		"errChechV" : "! Fehler kartoflen salad",
-		"newVersion" : "? Version machin dispo! > ${versionNumber} (Current : ${currentVersion})"
+		"newVersion" : "? Version machin dispo! > ${versionNumber} (Current : ${currentVersion})",
+		"startExpress" : "> Express' server started on port ${port}"
     }
 }
