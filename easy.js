@@ -221,16 +221,31 @@ app.post("/update", function(req, res) {
 				if (err) throw err;
 				res.redirect("/dashboard")
 			});
+			var clientGuild = client.guilds.array();
+			for (var i=0; i < clientGuild.length; i++) {
+				serveurObj = client.guilds.get(clientGuild[i].id);
+				changeNickname(serveurObj);
+			}
+		
+			changeGame();
 
 		} else {
 			res.status(403)
 		}
 	} else {
 		script = JSON.parse(req.body.code)
-		fs.writeFile('scriptt.json', req.body.code, 'utf8', function(err, data) {
+		fs.writeFile('script.json', req.body.code, 'utf8', function(err, data) {
 			if (err) throw err;
 			res.redirect("/dashboard")
 		});
+
+		var clientGuild = client.guilds.array();
+		for (var i=0; i < clientGuild.length; i++) {
+			serveurObj = client.guilds.get(clientGuild[i].id);
+			changeNickname(serveurObj);
+		}
+	
+		changeGame();
 	}
 })
 

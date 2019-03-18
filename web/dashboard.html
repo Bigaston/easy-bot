@@ -23,14 +23,29 @@
 			<p><a href="https://bigaston.github.io/easy-bot/">Documentation</a> <a href="https://bigaston.github.io/easy-bot/changelog">Changelog</a></p>
 
 			<h2>Your code</h2>
-			<form action="./update" method="post">
+			<form action="./update" method="post" id="code_form">
 				<textarea class="form-control" id="code" rows="20" name="code"></textarea><br>
 
-				<button type="submit" class="btn btn-primary">Update</button>
+				<button onclick="verifySubmit()" class="btn btn-primary" id="verifyButton">Update</button>
 			</form>
 		</center>
 
 		<script>
+			function verifySubmit() {
+				try {
+					JSON.parse(document.getElementById("code").value)
+
+					document.getElementById("verifyButton").className("btn btn-primary")
+					document.getElementById("code_form").submit();
+				} catch(error) {
+					console.log(error)
+					work = false;
+					document.getElementById("verifyButton").className("btn btn-warning")
+					
+					return;
+				}
+
+			}
 			version = "";
 			fetch('https://raw.githubusercontent.com/Bigaston/easy-bot/master/package.json')
 				.then( function (response) {
