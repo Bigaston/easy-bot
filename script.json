@@ -1,5 +1,0 @@
-{
-	"@token@": "[Your bot token here]",
-	"@prefix@": "!",
-	"@infoChannel@": "[Your default channel id here]"
-}
