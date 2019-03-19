@@ -22,15 +22,28 @@
 
 			<p><a href="https://bigaston.github.io/easy-bot/">Documentation</a> <a href="https://bigaston.github.io/easy-bot/changelog">Changelog</a></p>
 
+			<div id="bot_info"></div>
+			<button onclick="openURL()" class="btn btn-primary" id="inviteButton" disabled>Invite to your server</button><br><br>
+
 			<h2>Your code</h2>
 			<form action="./update" method="post" id="code_form">
-				<textarea class="form-control" id="code" rows="20" name="code"></textarea><br>
-
+				<textarea class="form-control" id="code" rows="20" name="code"></textarea> <br>
 				<button onclick="verifySubmit()" class="btn btn-primary" id="verifyButton">Update</button>
 			</form>
+
 		</center>
 
 		<script>
+			bot_id = "";
+			version = "";
+
+			function updateBot() {
+				fetch("/update_bot");
+			}
+
+			function openURL() {
+				window.open(`https://discordapp.com/oauth2/authorize?client_id=${bot_id}&scope=bot&permissions=335735808`, target="_blank")
+			}
 			function verifySubmit() {
 				try {
 					JSON.parse(document.getElementById("code").value)
@@ -46,7 +59,6 @@
 				}
 
 			}
-			version = "";
 			fetch('https://raw.githubusercontent.com/Bigaston/easy-bot/master/package.json')
 				.then( function (response) {
 					if (response.ok)
@@ -80,20 +92,55 @@
 					}
 
 					if (online[0] > local[0]) {
-						document.getElementById("last_version").innerHTML = "You can download a new version on <a href=\"https://github.com/Bigaston/easy-bot\">Github</a>!"
+						p = document.getElementById("last_version")
+						p.innerHTML = "You can download a new version on <a href=\"https://github.com/Bigaston/easy-bot\">Github</a>! <br> <button class=\"btn btn-danger\" onclick=\"updateBot()\">Update the bot</button>"
 					} else if (online[0] == local[0]) {
 						if (online[1] > local[1]) {
-							document.getElementById("last_version").innerHTML = "You can download a new version on <a href=\"https://github.com/Bigaston/easy-bot\">Github</a>!"
+							p = document.getElementById("last_version")
+							p.innerHTML = "You can download a new version on <a href=\"https://github.com/Bigaston/easy-bot\">Github</a>! <br> <button class=\"btn btn-danger\" onclick=\"updateBot()\">Update the bot</button>"
 						} else if (online[1] == local[1]) {
 							if (online[2] > local[2]) {
-								document.getElementById("last_version").innerHTML = "You can download a new version on <a href=\"https://github.com/Bigaston/easy-bot\">Github</a>!"
+								p = document.getElementById("last_version")
+								p.innerHTML = "You can download a new version on <a href=\"https://github.com/Bigaston/easy-bot\">Github</a>! <br> <button class=\"btn btn-danger\" onclick=\"updateBot()\">Update the bot</button>"
 							} 
 						}
 					}
+
+					addBotInfo(data.code);
 				})
 				.catch( function (error) {
 					console.log(error.message);
 				});
+			function addBotInfo(pCode) {
+				header = new Headers({
+					"Authorization" : "Bot " + pCode["@token@"] 
+				})
+
+				fetch("https://discordapp.com/api/users/@me", {headers: header})
+					.then( function(response) {
+						if (response.ok)
+							return response.json();
+						throw new Error('Response is not OK');
+					})
+					.then( function(data) {
+						bot_id = data.id;
+						div = document.getElementById("bot_info")
+						title = document.createElement("h2")
+						title.innerHTML = "Your bot information"
+						img = document.createElement("img")
+						img.src = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`
+						img.alt = "Bot Image"
+						p = document.createElement("p")
+						p.innerHTML = `${data.username}#${data.discriminator}`
+
+						div.appendChild(title);
+						div.appendChild(img);
+						div.appendChild(p);
+
+						document.getElementById("inviteButton").disabled = false;
+
+					})
+			}
 		</script>
 
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

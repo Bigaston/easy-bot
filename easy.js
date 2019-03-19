@@ -8,6 +8,7 @@ const package = require("./package.json")
 var script = require("./script.json");
 const lang = require("./lib/lang.json");
 const config = require("./config.json");
+const { exec } = require('child_process');
 
 const bcrypt = require("bcrypt");
 
@@ -204,12 +205,12 @@ app.get("/dashboard", function(req, res) {
 app.get("/get_code", function(req, res) {
 	if (config.online_login) {
 		if (req.session.token == db.get("user." + req.session.name + ".token").value()) {
-			res.status(200).json({code: script, version: package.version});
+			res.status(200).json({version: package.version, code: script});
 		} else {
 			res.status(403)
 		}
 	} else {
-		res.status(200).json({code: script});
+		res.status(200).json({version: package.version, code: script});
 	}
 })
 
@@ -276,6 +277,49 @@ app.post("/login", function(req, res) {
 		res.redirect("/");
 	
 	}
+})
+
+app.get("/update_bot", function(req, res){
+	if (config.online_login) {
+		if (req.session.token == db.get("user." + req.session.name + ".token").value()) {
+			exec("git pull", (err, stdout, stderr) => {
+				if (err) {
+				  console.log(err)
+				  return;
+				} else {
+					exec("npm install", (err, stdout, stderr) => {
+						if (err) {
+							console.log(err)
+							return
+						} else {
+							process.exit();	
+						}
+					});
+				}
+			})
+		} else {
+			res.status(403)
+		}
+	} else {
+		exec("git pull", (err, stdout, stderr) => {
+			if (err) {
+			  console.log(err)
+			  return;
+			} else {
+				exec("npm install", (err, stdout, stderr) => {
+					if (err) {
+						console.log(err)
+						return
+					} else {
+						process.exit();	
+					}
+				});
+			}
+		})
+		
+		
+	}
+
 })
 
 
