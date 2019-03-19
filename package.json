@@ -1,6 +1,6 @@
 {
   "name": "easy-bot",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "A system to create your own Discord bot with JSON.",
   "main": "easy.js",
   "repository": {
@@ -21,6 +21,7 @@
     "express": "^4.16.4",
     "lowdb": "^1.0.0",
     "node-fetch": "^2.3.0",
-    "rand-token": "^0.4.0"
+    "rand-token": "^0.4.0",
+    "shelljs": "^0.8.3"
   }
 }

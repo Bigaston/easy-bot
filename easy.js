@@ -2,13 +2,13 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const fetch = require("node-fetch")
 var fs = require('fs');
+var shell = require('shelljs');
 
 // Import JSON Files'
 const package = require("./package.json")
 var script = require("./script.json");
 const lang = require("./lib/lang.json");
 const config = require("./config.json");
-const { exec } = require('child_process');
 
 const bcrypt = require("bcrypt");
 
@@ -235,7 +235,7 @@ app.post("/update", function(req, res) {
 		}
 	} else {
 		script = JSON.parse(req.body.code)
-		
+
 		var clientGuild = client.guilds.array();
 		for (var i=0; i < clientGuild.length; i++) {
 			serveurObj = client.guilds.get(clientGuild[i].id);
@@ -283,42 +283,36 @@ app.post("/login", function(req, res) {
 app.get("/update_bot", function(req, res){
 	if (config.online_login) {
 		if (req.session.token == db.get("user." + req.session.name + ".token").value()) {
-			exec("git pull", (err, stdout, stderr) => {
-				if (err) {
-				  console.log(err)
-				  return;
-				} else {
-					exec("npm install", (err, stdout, stderr) => {
-						if (err) {
-							console.log(err)
-							return
-						} else {
+			shell.exec("git pull", (code, stdout, stderr) => {
+				if (code == 0) {
+					shell.exec("npm install", (code, stdout, stderr) => {
+						if (code == 0) {
 							process.exit();	
+						} else {
+							console.log("Error!")
 						}
 					});
+				} else {
+					console.log("Error!")
 				}
 			})
 		} else {
 			res.status(403)
 		}
 	} else {
-		exec("git pull", (err, stdout, stderr) => {
-			if (err) {
-			  console.log(err)
-			  return;
-			} else {
-				exec("npm install", (err, stdout, stderr) => {
-					if (err) {
-						console.log(err)
-						return
-					} else {
+		shell.exec("git pull", (code, stdout, stderr) => {
+			if (code == 0) {
+				shell.exec("npm install", (code, stdout, stderr) => {
+					if (code == 0) {
 						process.exit();	
+					} else {
+						console.log("Error!")
 					}
 				});
+			} else {
+				console.log("Error!")
 			}
-		})
-		
-		
+		})		
 	}
 
 })
