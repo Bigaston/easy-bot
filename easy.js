@@ -3,6 +3,7 @@ const client = new Discord.Client();
 const fetch = require("node-fetch")
 var fs = require('fs');
 var shell = require('shelljs');
+var path = require('path');
 
 // Import JSON Files'
 const package = require("./package.json")
@@ -293,36 +294,64 @@ app.post("/login", function(req, res) {
 app.get("/update_bot", function(req, res){
 	if (config.online_login) {
 		if (req.session.token == db.get("user." + req.session.name + ".token").value()) {
-			shell.exec("git pull", (code, stdout, stderr) => {
+			shell.exec("git reset --hard; git pull", (code, stdout, stderr) => {
 				if (code == 0) {
 					shell.exec("npm install", (code, stdout, stderr) => {
 						if (code == 0) {
-							process.exit();	
+							shell.exec("rm -r " + path.basename(__filename), (code, stdout, stderr) => {
+								if (code==0) {
+									shell.exec("mv easy.js " + path.basename(__filename), (code, stdout, stderr) => {
+										if (code == 0) {
+											process.exit();	
+											res.send("Maj OK! Please refresh this page!")
+
+										} else {
+											res.send("Error : " + stdout + " - " + stderr);
+										}
+									})
+								} else {
+									res.send("Error : " + stdout + " - " + stderr);
+								}
+							})
 						} else {
-							console.log("Error!")
+							res.send("Error : " + stdout + " - " + stderr);
 						}
 					});
 				} else {
-					console.log("Error!")
+					res.send("Error : " + stdout + " - " + stderr);
 				}
 			})
 		} else {
 			res.status(403)
 		}
 	} else {
-		shell.exec("git pull", (code, stdout, stderr) => {
+		shell.exec("git reset --hard; git pull", (code, stdout, stderr) => {
 			if (code == 0) {
 				shell.exec("npm install", (code, stdout, stderr) => {
 					if (code == 0) {
-						process.exit();	
+						shell.exec("rm -r " + path.basename(__filename), (code, stdout, stderr) => {
+							if (code==0) {
+								shell.exec("mv easy.js " + path.basename(__filename), (code, stdout, stderr) => {
+									if (code == 0) {
+										process.exit();	
+										res.send("Maj OK! Please refresh this page!")
+
+									} else {
+										res.send("Error : " + stdout + " - " + stderr);
+									}
+								})
+							} else {
+								res.send("Error : " + stdout + " - " + stderr);
+							}
+						})
 					} else {
-						console.log("Error!")
+						res.send("Error : " + stdout + " - " + stderr);
 					}
 				});
 			} else {
-				console.log("Error!")
+				res.send("Error : " + stdout + " - " + stderr);
 			}
-		})		
+		})
 	}
 
 })
