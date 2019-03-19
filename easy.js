@@ -262,6 +262,16 @@ app.post("/newuser", function(req, res) {
 	}
 })
 
+app.post("/editpassword", function(req, res) {
+	if (req.session.token == db.get("user." + req.session.name + ".token").value()) {
+		password = bcrypt.hashSync(req.body.password, 12);
+
+		db.set("user." +  req.session.name, {"password" : password, "token" : ""}).write()
+		req.session.token = "nothing";
+		res.redirect("/");
+	}
+})
+
 app.post("/login", function(req, res) {
 	if (db.get("user." + req.body.name).value() != undefined) {
 		if (bcrypt.compareSync(req.body.password, db.get("user." + req.body.name).value().password)) {

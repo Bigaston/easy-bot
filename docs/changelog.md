@@ -1,4 +1,9 @@
 ## 0.5
+### 0.5.6 (19/03/19 14:20)
+
+- Add user in the dashboard
+- Edit password in the dashboard
+
 ### 0.5.3 (19/03/19 13:10)
 
 - Add bot info in the dashboard

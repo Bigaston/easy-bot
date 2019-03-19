@@ -31,6 +31,63 @@
 				<button onclick="verifySubmit()" class="btn btn-primary" id="verifyButton">Update</button>
 			</form>
 
+			<h2>Your account & Admin</h2>
+			<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPassword">
+				Change password
+			</button>
+				
+			<div class="modal fade" id="modalPassword" tabindex="-1" role="dialog" aria-labelledby="modalPasswordTitle" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+						<h5 class="modal-title" id="modalPasswordTitle">Change your password</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						</div>
+						<div class="modal-body">
+							<form action="./editpassword" method="post">		
+								<div class="form-group">
+									<label for="password-edit">Password</label>
+									<input type="password" class="form-control" id="password-edit" placeholder="Password" name="password">
+								</div>				
+								<button type="submit" class="btn btn-primary">Update</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAddUser">
+				Add User
+			</button>
+						
+			<div class="modal fade" id="modalAddUser" tabindex="-1" role="dialog" aria-labelledby="modalAddUserTitle" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+						<h5 class="modal-title" id="modalAddUserTitle">Add user</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						</div>
+						<div class="modal-body">
+							<form action="./newuser" method="post">
+								<div class="form-group">
+									<label for="name">Username</label>
+									<input type="text" class="form-control" id="name" placeholder="Username" name="name">
+								</div>
+					
+								<div class="form-group">
+									<label for="password">Password</label>
+									<input type="password" class="form-control" id="password" placeholder="Password" name="password">
+								</div>				
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 		</center>
 
 		<script>
