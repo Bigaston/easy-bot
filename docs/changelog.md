@@ -1,4 +1,9 @@
 ## 0.5
+### 0.5.3 (19/03/19 13:10)
+
+- Add bot info in the dashboard
+- Add maj button in the dashboard
+
 ### 0.5.1 (18/03/19 19:00)
 
 - Add a changeName and a changeGame after the update
