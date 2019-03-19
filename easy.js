@@ -298,21 +298,26 @@ app.get("/update_bot", function(req, res){
 				if (code == 0) {
 					shell.exec("npm install", (code, stdout, stderr) => {
 						if (code == 0) {
-							shell.exec("rm -r " + path.basename(__filename), (code, stdout, stderr) => {
-								if (code==0) {
-									shell.exec("mv easy.js " + path.basename(__filename), (code, stdout, stderr) => {
-										if (code == 0) {
-											process.exit();	
-											res.send("Maj OK! Please refresh this page!")
-
-										} else {
-											res.send("Error : " + stdout + " - " + stderr);
-										}
-									})
-								} else {
-									res.send("Error : " + stdout + " - " + stderr);
-								}
-							})
+							if (path.basename(__filename) == "easy.js") {
+								process.exit();	
+								res.send("Maj OK! Please refresh this page!")
+							} else {
+								shell.exec("rm -r " + path.basename(__filename), (code, stdout, stderr) => {
+									if (code==0) {
+										shell.exec("mv easy.js " + path.basename(__filename), (code, stdout, stderr) => {
+											if (code == 0) {
+												process.exit();	
+												res.send("Maj OK! Please refresh this page!")
+		
+											} else {
+												res.send("Error : " + stdout + " - " + stderr);
+											}
+										})
+									} else {
+										res.send("Error : " + stdout + " - " + stderr);
+									}
+								})
+							}
 						} else {
 							res.send("Error : " + stdout + " - " + stderr);
 						}
@@ -329,21 +334,26 @@ app.get("/update_bot", function(req, res){
 			if (code == 0) {
 				shell.exec("npm install", (code, stdout, stderr) => {
 					if (code == 0) {
-						shell.exec("rm -r " + path.basename(__filename), (code, stdout, stderr) => {
-							if (code==0) {
-								shell.exec("mv easy.js " + path.basename(__filename), (code, stdout, stderr) => {
-									if (code == 0) {
-										process.exit();	
-										res.send("Maj OK! Please refresh this page!")
-
-									} else {
-										res.send("Error : " + stdout + " - " + stderr);
-									}
-								})
-							} else {
-								res.send("Error : " + stdout + " - " + stderr);
-							}
-						})
+						if (path.basename(__filename) == "easy.js") {
+							process.exit();	
+							res.send("Maj OK! Please refresh this page!")
+						} else {
+							shell.exec("rm -r " + path.basename(__filename), (code, stdout, stderr) => {
+								if (code==0) {
+									shell.exec("mv easy.js " + path.basename(__filename), (code, stdout, stderr) => {
+										if (code == 0) {
+											process.exit();	
+											res.send("Maj OK! Please refresh this page!")
+	
+										} else {
+											res.send("Error : " + stdout + " - " + stderr);
+										}
+									})
+								} else {
+									res.send("Error : " + stdout + " - " + stderr);
+								}
+							})
+						}
 					} else {
 						res.send("Error : " + stdout + " - " + stderr);
 					}
