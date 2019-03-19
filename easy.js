@@ -308,9 +308,8 @@ app.get("/update_bot", function(req, res){
 									if (code==0) {
 										shell.exec("mv easy.js " + path.basename(__filename), (code, stdout, stderr) => {
 											if (code == 0) {
-												process.exit();	
-												res.send("Maj OK! Please refresh this page!")
-		
+												res.redirect("/dashboard");
+												process.exit();			
 											} else {
 												res.send("Error : " + stdout + " - " + stderr);
 											}
@@ -344,8 +343,8 @@ app.get("/update_bot", function(req, res){
 								if (code==0) {
 									shell.exec("mv easy.js " + path.basename(__filename), (code, stdout, stderr) => {
 										if (code == 0) {
-											process.exit();	
-											res.send("Maj OK! Please refresh this page!")
+											res.redirect("/dashboard");
+											process.exit();			
 	
 										} else {
 											res.send("Error : " + stdout + " - " + stderr);
