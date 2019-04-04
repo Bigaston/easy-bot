@@ -25,3 +25,4 @@
 - Server list
 - Button to add the bot to your discord
 - Add "visual scripting"
+- Use HJson (https://hjson.org)
