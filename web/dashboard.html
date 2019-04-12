@@ -32,9 +32,12 @@
 			<div id="server_list"></div>
 
 			<h2>Your code</h2>
+			<div id="easymode"></div>
+			<textarea class="form-control" id="code" rows="20" name="code"></textarea> <br>
+			<button onclick="verifySubmit()" class="btn btn-primary" id="verifyButton">Update</button>
+
 			<form action="./update" method="post" id="code_form">
-				<textarea class="form-control" id="code" rows="20" name="code"></textarea> <br>
-				<button onclick="verifySubmit()" class="btn btn-primary" id="verifyButton">Update</button>
+
 			</form>
 
 			<h2>Your account & Admin</h2>
@@ -112,12 +115,21 @@
 				try {
 					JSON.parse(document.getElementById("code").value)
 
-					document.getElementById("verifyButton").className("btn btn-primary")
-					document.getElementById("code_form").submit();
+					document.getElementById("verifyButton").className = "btn btn-primary"
+					obj = JSON.parse(document.getElementById("code").value)
+
+					console.log(obj)
+					fetch("/update", {
+						method: "post",
+						headers : {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({code: JSON.stringify(obj, null, 2)})
+					})
 				} catch(error) {
-					console.log(error)
+					window.alert("Your JSON is not correct!")
 					work = false;
-					document.getElementById("verifyButton").className("btn btn-warning")
+					document.getElementById("verifyButton").className = "btn btn-warning"
 					
 					return;
 				}
@@ -135,6 +147,58 @@
 				.catch( function (error) {
 					console.log(error.message);
 				});
+
+			function dispCode(code) {
+				if (window.location.hash == "") {
+					return JSON.stringify(code, null, 2);
+				} else {
+					div = document.getElementById("easymode")
+					div.innerHTML = `<div class="input-group mb-3">
+  										<div class="input-group-prepend">
+											<span class="input-group-text" id="tok-desc">Your bot token</span>
+										</div>
+										<input type="text" class="form-control" id="@token@" aria-describedby="tok-desc" value=${code["@token@"]}>
+									</div>
+									
+									<div class="input-group mb-3">
+  										<div class="input-group-prepend">
+											<span class="input-group-text" id="prefix-desc">Your prefix</span>
+										</div>
+										<input type="text" class="form-control" id="@prefix@" aria-describedby="prefix-desc" value=${code["@prefix@"]}>
+									</div>
+
+									<div class="input-group mb-3">
+  										<div class="input-group-prepend">
+											<span class="input-group-text" id="info-desc">The bot information channel</span>
+										</div>
+										<input type="text" class="form-control" id="@infoChannel@" aria-describedby="info-desc" value=${code["@infoChannel@"]}>
+									</div>`
+					
+					if (code["@customName@"] != undefined) {
+						div.innerHTML = div.innerHTML + `
+						<div class="input-group mb-3">
+  							<div class="input-group-prepend">
+								<span class="input-group-text" id="name-desc">The bot name</span>
+							</div>
+							<input type="text" class="form-control" id="@customName@" aria-describedby="name-desc" value=${code["@customName@"]}>
+						</div>`
+					}
+
+					if (code["@customGame@"] != undefined) {
+						div.innerHTML = div.innerHTML + `
+						<div class="input-group mb-3">
+  							<div class="input-group-prepend">
+								<span class="input-group-text" id="game-desc">The bot played game</span>
+							</div>
+							<input type="text" class="form-control" id="@customGame@" aria-describedby="game-desc" value=${code["@customGame@"]}>
+						</div>`
+					}
+
+
+									
+
+				}
+			}
 			fetch("/get_code")
 				.then( function (response) {
 					if (response.ok)
@@ -143,7 +207,7 @@
 				})
 				.then( function (data) {
 					txt_box = document.getElementById("code");
-					txt_box.innerHTML = JSON.stringify(data.code, null, 2);
+					txt_box.innerHTML = dispCode(data.code)
 					v = document.getElementById("bot_version")
 					v.innerHTML = "Bot version : " + data.version + " - Last version : " + version
 
