@@ -79,7 +79,7 @@ client.on("message", message => {
 	}
 
 	var sscript = clone(script);
-	args[0] = args[0].replace(script["@prefix@"], "");
+	args[0] = args[0].replace(script["@prefix@"], "").toLowerCase();
 
 	if (checksecurity(args) == false) {
 		if ("#errorCommand#" in sscript) {
