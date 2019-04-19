@@ -44,7 +44,7 @@ You can define some customs parameters whitch is replaced by something :
 
 ### Server:
 - `%server:someone%` : Choose a random user in the server
-- `%server:someone[nobot]%` : Choose a random user in the server without bot
+- `%server:someone:nobot%` : Choose a random user in the server without bot
 
 ### Exemple :
 In the code
