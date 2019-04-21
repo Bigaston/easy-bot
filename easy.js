@@ -94,7 +94,9 @@ client.on("message", message => {
 			if (Array.isArray(sscript[args[i]])) {
 				var response = chooseResponse(sscript[args[i]]);
 				response = replaceCommandArg(response, args, message);
-				message.channel.send(response);
+				if (response != "") {
+					message.channel.send(response);
+				}
 			} else if (typeof(sscript[args[i]]) == "object") {
 				sscript = clone(sscript[args[i]])
 				if (channel.trigger(sscript, message) == 0) {
@@ -102,7 +104,9 @@ client.on("message", message => {
 						if ("#errorCommand#" in sscript) {
 							response = sscript["#errorCommand#"]
 							response = replaceCommandArg(response, args, message);
-							message.channel.send(response);
+							if (response != "") {
+								message.channel.send(response);
+							}
 						}
 					}
 				} else {
@@ -110,7 +114,9 @@ client.on("message", message => {
 					if (Array.isArray(sscript)) {
 						var response = chooseResponse(sscript);
 						response = replaceCommandArg(response, args, message);
-						message.channel.send(response);
+						if (response != "") {
+							message.channel.send(response);
+						}
 					} else if (typeof(sscript) == "object") {
 						if (args.length == 0) {
 							i--;
@@ -118,37 +124,49 @@ client.on("message", message => {
 					} else {
 						var response = sscript;
 						response = replaceCommandArg(response, args, message);
-						message.channel.send(response);
+						if (response != "") {
+							message.channel.send(response);
+						}
 					}
 				}
 			} else {
 				var response = sscript[args[i]];
 				response = replaceCommandArg(response, args, message);
-				message.channel.send(response);
+				if (response != "") {
+					message.channel.send(response);
+				}
 			}
 		} else if ("#default#" in sscript) {
 			if (Array.isArray(sscript["#default#"])) {
 				var response = chooseResponse(sscript["#default#"]);
 				response = replaceCommandArg(response, args, message);
-				message.channel.send(response);
+				if (response != "") {
+					message.channel.send(response);
+				}
 			} else if (typeof(sscript["#default#"]) == "object") {
 				sscript = clone(sscript["#default#"])
 				if (i == args.length - 1) {
 					if ("#errorCommand#" in sscript) {
 						response = sscript["#errorCommand#"]
 						response = replaceCommandArg(response, args, message);
-						message.channel.send(response);
+						if (response != "") {
+							message.channel.send(response);
+						}
 					}
 				}
 			} else {
 				var response = sscript["#default#"];
 				response = replaceCommandArg(response, args, message);
-				message.channel.send(response);
+				if (response != "") {
+					message.channel.send(response);
+				}
 			}
 		} else if ("#errorCommand#" in sscript) {
 			response = sscript["#errorCommand#"]
 			response = replaceCommandArg(response, args, message);
-			message.channel.send(response);
+			if (response != "") {
+				message.channel.send(response);
+			}
 		}
 
 		i++;

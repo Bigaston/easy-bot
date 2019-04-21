@@ -2,6 +2,7 @@
 - Command to add command
 - Modify option in Discord
 - Add hardcoded command (info, script)
+- Add some event sender to dashboard or discord
 
 # Synthax
 - Add action (add roles, kick member)
@@ -13,6 +14,7 @@
 - Event to trigger at a time
 - Add option to search in the lang file
 - Add option to send to other channel
+- Send to author
 
 # Other
 - Upgrade doc (lang file)
