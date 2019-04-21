@@ -1,4 +1,14 @@
 ## 0.6
+### 0.6.1 (21/04/2019)
+- Add exception for API when the request's body is something like (used by Ko-Fi, still WIP, maybe will change)
+```JSON
+{
+	"data": {
+		"the" : "request"
+	}
+}
+```
+
 ### 0.6.0 (21/04/2019)
 - Add API (see [docs](https://easy-bot.js.org/) for details!)
 

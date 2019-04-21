@@ -403,6 +403,12 @@ app.post("/api/:event", function(req, res){
 		text = script["?" + req.params.event + "?"]
 		body = req.body;
 		key = Object.keys(body);
+
+		// Ko-Fi exception
+		if (key.length == 1 && key[0] == "data") {
+			body = body["data"];
+			key = Object.keys(body);
+		}
 		
 		for (i = 0; i < key.length; i++) {
 			text = text.replace("%web:" + key[i] + "%", body[key[i]])
