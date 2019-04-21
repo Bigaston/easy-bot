@@ -19,7 +19,7 @@ const FileSync = require('lowdb/adapters/FileSync');
 const adapter = new FileSync('db.json');
 const db = low(adapter);
 
-db.defaults({ user: {}, number: 0})
+db.defaults({ user: {}, number: 0, token: ""})
 	.write();
 
 var cookieSession = require('cookie-session')
@@ -41,6 +41,11 @@ app.use(cookieSession({
   }))
 
 var randtoken = require('rand-token');
+
+
+if (db.get("token").value() == "") {
+	db.set("token", randtoken.generate(32)).write()
+}
 
 // Import lib and function
 eval(fs.readFileSync("./lib/function.js").toString());
@@ -229,12 +234,12 @@ app.get("/dashboard", function(req, res) {
 app.get("/get_code", function(req, res) {
 	if (config.online_login) {
 		if (req.session.token == db.get("user." + req.session.name + ".token").value()) {
-			res.status(200).json({version: package.version, code: script});
+			res.status(200).json({version: package.version, code: script, api: db.get("token").value()});
 		} else {
 			res.status(403)
 		}
 	} else {
-		res.status(200).json({version: package.version, code: script});
+		res.status(200).json({version: package.version, code: script, api: db.get("token").value()});
 	}
 })
 
@@ -388,6 +393,31 @@ app.get("/update_bot", function(req, res){
 
 })
 
+app.post("/api/:event", function(req, res){
+	if (req.query.t != db.get("token").value()) {
+		res.send(403)
+		return;
+	}
+
+	if ("?" + req.params.event + "?" in script) {
+		text = script["?" + req.params.event + "?"]
+		body = req.body;
+		key = Object.keys(body);
+		
+		for (i = 0; i < key.length; i++) {
+			text = text.replace("%web:" + key[i] + "%", body[key[i]])
+		}
+
+
+		text = replaceGlobalArg(text);
+		text = game.event(text, client);
+		text = channel.event(text, client);
+
+		res.status(200).send(text);
+	} else {
+		res.send(404)
+	}
+})
 
 app.listen(config.port, function() {
 	console.log(sendLang("startExpress").replace("${port}", config.port));

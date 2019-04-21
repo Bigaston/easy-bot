@@ -152,3 +152,35 @@ When you write some of this in your response, they will do some action and be er
 - `!channel:sendOnly[channel_id]!` : Send the response only on the channel specified in channel_id
 - `!channel:sendTo[channel_id]!` : Send the response on the channel specified in channel_id (can be used many time) and not on the message channel
 - `!channel:send[channel_id]!` : Send the response on the channel specified in channel_id (can be used many time) and on the message channel
+
+## Web request
+You can trigger some event with the EasyBot API. For that you need your API Token (you can find it in the dashboard), after that just send a POST request to the URL of your event.
+
+URL is like : [yourDomaineAndPort]/api/[theNameOfYourEvent]?t=[yourAPIToken]
+
+You can use the `%web:{body_key}%` parameter to replace it with your POST request body.
+
+You need to specify a channel with `!channel:send[id]!` ! Or the bot will not send message!
+
+You can use Random parameters and Game event!
+
+### Example :
+
+POST REQUEST to yoururl.me:6000/api/test?t=123456789 with body:
+```JSON
+{
+	"name" : "Machin"
+}
+```
+
+Script :
+```
+{
+	"?test?" : "Hello %web:name%! !channel:send[123456789]!"
+}
+```
+
+In Discord, in the channel with id 123456789
+```
+EasyBot : Hello Machin!
+```
