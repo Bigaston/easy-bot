@@ -1,6 +1,6 @@
 ## 0.6
 ### 0.6.0 (21/04/2019)
-- Add API (see [docs]() for details!)
+- Add API (see [docs](https://easy-bot.js.org/) for details!)
 
 ## 0.5
 ### 0.5.6 (19/03/19 14:20)
