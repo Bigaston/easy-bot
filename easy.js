@@ -406,7 +406,7 @@ app.post("/api/:event", function(req, res){
 
 		// Ko-Fi exception
 		if (key.length == 1 && key[0] == "data") {
-			body = body["data"];
+			body = JSON.parse(body["data"]);
 			key = Object.keys(body);
 		}
 		
