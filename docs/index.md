@@ -45,6 +45,7 @@ You can define some customs parameters whitch is replaced by something :
 ### Server:
 - `%server:someone%` : Choose a random user in the server
 - `%server:someone:nobot%` : Choose a random user in the server without bot
+- `%server:number:member%` : The number of user in a guild (can be use in command, #userLeave#, and #userJoin#)
 
 ### Exemple :
 In the code
@@ -152,6 +153,7 @@ When you write some of this in your response, they will do some action and be er
 - `!channel:sendOnly[channel_id]!` : Send the response only on the channel specified in channel_id
 - `!channel:sendTo[channel_id]!` : Send the response on the channel specified in channel_id (can be used many time) and not on the message channel
 - `!channel:send[channel_id]!` : Send the response on the channel specified in channel_id (can be used many time) and on the message channel
+- `!channel:setname[channel_id]:[name]!` : Change the name of a text channel (not tested on voice channel)
 
 ## Web request
 You can trigger some event with the EasyBot API. For that you need your API Token (you can find it in the dashboard), after that just send a POST request to the URL of your event.

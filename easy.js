@@ -184,6 +184,7 @@ client.on("guildMemberAdd", user => {
 		var text = script["#userJoin#"]
 		text = text.replace("%user%", `<@${user.id}>`)
 		text = replaceGlobalArg(text, user.guild)
+		text = server.param(text, user.guild);
 		client.channels.get(script["@infoChannel@"]).send(text);
 	}
 })
@@ -194,6 +195,7 @@ client.on("guildMemberRemove", user => {
 		var text = script["#userLeave#"]
 		text = text.replace("%user%", user.displayName)
 		text = replaceGlobalArg(text, user.guild)
+		text = server.param(text, user.guild);
 		client.channels.get(script["@infoChannel@"]).send(text);
 	}
 })

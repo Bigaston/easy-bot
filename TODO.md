@@ -13,7 +13,6 @@
 - Add some tracery grammar (?)
 - Event to trigger at a time
 - Add option to search in the lang file
-- Add option to send to other channel
 - Send to author
 
 # Other
