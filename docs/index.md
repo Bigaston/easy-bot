@@ -75,7 +75,7 @@ You may define some bot settings in the JSON doc:
 
 - \#`@infoChannel@` : The channel id of your annoncement channel
 
-- `@lang@` : The language of your bot for system message (for now "fr", "en" or "de")
+- `@lang@` : The language of your bot for system message (for now "fr", "en", "de" or "pl")
 - `@customName@` : The nickname of Easy Bot in your server
 - `@customGame@` : The custom game of EasyBot
 

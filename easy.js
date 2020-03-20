@@ -324,7 +324,7 @@ app.post("/login", function(req, res) {
 app.get("/update_bot", function(req, res){
 	if (config.online_login) {
 		if (req.session.token == db.get("user." + req.session.name + ".token").value()) {
-			shell.exec("git reset --hard; git pull", (code, stdout, stderr) => {
+			shell.exec("git reset --hard && git pull", (code, stdout, stderr) => {
 				if (code == 0) {
 					shell.exec("npm install", (code, stdout, stderr) => {
 						if (code == 0) {
@@ -359,7 +359,7 @@ app.get("/update_bot", function(req, res){
 			res.status(403)
 		}
 	} else {
-		shell.exec("git reset --hard; git pull", (code, stdout, stderr) => {
+		shell.exec("git reset --hard && git pull", (code, stdout, stderr) => {
 			if (code == 0) {
 				shell.exec("npm install", (code, stdout, stderr) => {
 					if (code == 0) {

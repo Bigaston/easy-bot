@@ -40,5 +40,19 @@
 		"errChechV" : "! Fehler kartoflen salad",
 		"newVersion" : "? Version machin dispo! > ${versionNumber} (Current : ${currentVersion})",
 		"startExpress" : "> Express' server started on port ${port}"
+    },
+    "pl": {
+        "join" : "Cześć! Jestem **${botname}**!",
+        "errPrefix" : "! BŁĄD : You have to set a prefix with\"@prefix@\"",
+        "errToken" : "! BŁĄD : You have to set a Discord token with \"@token@\"",
+        "errInfChan" : "! BŁĄD : You need to set a default channel if you want use #userJoin# or #userLeave# with \"@infoChannel@\"",
+        "startApp" : "--- Uruchamianie aplikacji ---",
+        "closeApp" : "--- Zamykanie aplikacji ---",
+		"discordLogin" : "> Połączono z Discordem!",
+		"dateFormat" : "mm/dd/yyyy",
+		"importGlobal" : "> Importowanie : Uruchamianie",
+		"errChechV" : "! Błąd w wersji kontrolnej",
+		"newVersion" : "? Nowa wersja jest dostępna! ${versionNumber} (Aktualna : ${currentVersion})",
+		"startExpress" : "> Uruchomnio serwer expressa na porcie ${port}"
     }
 }
