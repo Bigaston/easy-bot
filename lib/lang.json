@@ -50,7 +50,7 @@
         "closeApp" : "--- Zamykanie aplikacji ---",
 		"discordLogin" : "> Połączono z Discordem!",
 		"dateFormat" : "mm/dd/yyyy",
-		"importGlobal" : "> Importowanie : Uruchamianie",
+		"importGlobal" : "> Importowanie : Rozpoczynanie",
 		"errChechV" : "! Błąd w wersji kontrolnej",
 		"newVersion" : "? Nowa wersja jest dostępna! ${versionNumber} (Aktualna : ${currentVersion})",
 		"startExpress" : "> Uruchomnio serwer expressa na porcie ${port}"
